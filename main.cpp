@@ -1,8 +1,9 @@
 #include <iostream> // for std::cout and std::cerr
 #include <string> // for std::string
 #include <filesystem> // Required for creating directories
-#include <sstream> // for stringstream
-#include <iomanip> // for setw and setfill
+// #include <sstream> // for stringstream
+// #include <iomanip> // for setw and setfill
+#include <format> // c++20 required
 
 int main(int argc, char* argv[]) {
     // Check if there are enough arguments (program name + flag + value)
@@ -22,10 +23,12 @@ int main(int argc, char* argv[]) {
         int week_int = std::stoi(input);
 
         // Format back to 2-digit string (e.g., "03")
-        std::ostringstream oss;
-        oss << std::setw(2) << std::setfill('0') << week_int;
-        std::string week_number = oss.str();
+        // std::ostringstream oss;
+        // oss << std::setw(2) << std::setfill('0') << week_int;
+        // std::string week_number = oss.str();
 
+        // Format with leading zero using std::format (C++20)
+        std::string week_number = std::format(":02", week_int);
         std::string folder_name =  "week_" + week_number;
 
         if (!std::filesystem::exists(folder_name))  {

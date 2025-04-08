@@ -53,7 +53,7 @@ week_03/
 - Implement basic CLI interface
 
 ## 📚 Requirements
-- C++17 or newer
+- C++20 or newer
 
 - A C++ compiler like g++ or clang++
 
