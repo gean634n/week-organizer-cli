@@ -35,10 +35,12 @@ Run:
 
 This creates:
 ```
-week_03/
-├── reading.txt
-├── exercises/
-└── codes/
+week-03/
+├── insights.md
+├── insights.pt-br.md
+├── references.md
+├── references.pt-br.md
+└── study-plan.md
 ```
 
 ## 🎯 Learning Goals

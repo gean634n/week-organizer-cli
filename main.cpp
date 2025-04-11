@@ -4,6 +4,8 @@
 // #include <sstream> // for stringstream
 // #include <iomanip> // for setw and setfill
 #include <format> // c++20 required
+#include <fstream>
+#include <vector>
 
 int main(int argc, char* argv[]) {
     // Check if there are enough arguments (program name + flag + value)
@@ -22,27 +24,45 @@ int main(int argc, char* argv[]) {
         // Convert input to integer to remove leading zeros
         int week_int = std::stoi(input);
 
-        // Format back to 2-digit string (e.g., "03")
-        // std::ostringstream oss;
-        // oss << std::setw(2) << std::setfill('0') << week_int;
-        // std::string week_number = oss.str();
-
         // Format with leading zero using std::format (C++20)
         std::string week_number = std::format(":02", week_int);
         std::string folder_name =  "week_" + week_number;
 
-        if (!std::filesystem::exists(folder_name))  {
-            std::filesystem::create_directory(folder_name);
-            std::cout << "Created folder: " << folder_name << "\n";
+        std::filesystem::path base_path(folder_name);
+
+        if (!std::filesystem::exists(base_path))  {
+            std::filesystem::create_directory(base_path);
+            std::cout << "Created folder: " << base_path << "\n";
         } else {
-            std::cout << "Folder already exists: " << folder_name << "\n";
+            std::cout << "Folder already exists: " << base_path << "\n";
         }
 
+         // List of files to create
+        std::vector<std::string> files = {
+            "insights.md",
+            "insights.pt-br.md",
+            "references.md",
+            "references.pt-br.md",
+            "study-plan.md"
+        };
 
+        // Create each file if it doesn't exist
+        for (const auto& file_name : files) {
+            std::filesystem::path file_path = base_path / file_name;
+            if (!std::filesystem::exists(file_path)) {
+                std::ofstream file(file_path); // Creates empty file
+                file.close();
+                std::cout << "Created file: " << file_path << "\n";
+            } else {
+                std::cout << "File already exists: " << file_path << "\n";
+            }
+        }
     } else {
         std::cerr << "Unknown flag: " << flag << "\n";
         return 1;
     }
+
+
 
     return 0;
 }
