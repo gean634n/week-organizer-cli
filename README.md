@@ -4,10 +4,8 @@ A simple command-line tool to create weekly folders and files to organize study 
 
 ## 🚀 Features
 
-- Create a folder named `week_<number>`
-- Inside the folder:
-  - `reading.txt` file
-  - `exercises/` and `codes/` subfolders
+- Create a folder for a given week number (with leading zero): `week-01`, `week-02`, etc.
+- Inside the folder, the following files are created (if they don't already exist):
 
 ## 📦 Project Status
 
@@ -26,11 +24,11 @@ This project is in its early stage. The goal is to progressively enhance it whil
 Compile:
 
 ```bash
-g++ organizer.cpp -o organizer
+g++ main.cpp -o organizer
 ```
 Run:
 ```bash
-./organizer 03
+./organizer -w <week_number>
 ```
 
 This creates:
@@ -55,7 +53,7 @@ week-03/
 - Implement basic CLI interface
 
 ## 📚 Requirements
-- C++20 or newer
+- C++17 or newer
 
 - A C++ compiler like g++ or clang++
 

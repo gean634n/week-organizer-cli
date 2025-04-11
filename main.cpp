@@ -1,9 +1,7 @@
 #include <iostream> // for std::cout and std::cerr
 #include <string> // for std::string
 #include <filesystem> // Required for creating directories
-// #include <sstream> // for stringstream
-// #include <iomanip> // for setw and setfill
-#include <format> // c++20 required
+#include <sstream> // for stringstream
 #include <fstream>
 #include <vector>
 
@@ -24,10 +22,12 @@ int main(int argc, char* argv[]) {
         // Convert input to integer to remove leading zeros
         int week_int = std::stoi(input);
 
-        // Format with leading zero using std::format (C++20)
-        std::string week_number = std::format(":02", week_int);
-        std::string folder_name =  "week_" + week_number;
+        // Format with leading zero
+        std::ostringstream oss;
+        oss << std::setw(2) << std::setfill('0') << week_int;
+        std::string week_number = oss.str();
 
+        std::string folder_name =  "week_" + week_number;
         std::filesystem::path base_path(folder_name);
 
         if (!std::filesystem::exists(base_path))  {
